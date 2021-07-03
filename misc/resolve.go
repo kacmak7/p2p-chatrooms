@@ -16,16 +16,23 @@ func main() {
     listener, err := net.ListenTCP("tcp", tcpAddr)
     checkError(err)
 
-    for {
-        conn, err := listener.Accept()
-        if err != nil {
-            continue
-        }
 
-        daytime := time.Now().String()
-        conn.Write([]byte(daytime)) // don't care about return value
-        conn.Close()                // we're finished with this client
-    }
+	for {
+		conn, err := listener.Accept()
+		if err != nil {
+			continue
+		}
+
+		numRead, recvAddr, err := conn.ReadFrom(buf)
+        	if err != nil {
+            		fmt.Println(err)
+		}
+		if recvAddr != nil {
+            		fmt.Println(recvAddr)
+        	}
+        	s := string(buf[:numRead])
+              	fmt.Println(s)
+	}
 }
 
 func checkError(err error) {

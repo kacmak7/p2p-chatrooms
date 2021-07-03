@@ -4,7 +4,7 @@ import (
 	"log"
 )
 
-const ERROR_ID := "Error P2P@CHATROOMS"
+const ERROR_ID = "Error P2P@CHATROOMS"
 
 func CheckError(msg string, err error) {
 	if err != nil {
